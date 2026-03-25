@@ -278,7 +278,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-se
   border-radius: 20px; padding: 20px;
   position: relative; overflow: hidden;
 }
-canvas { width: 100% !important; }
+
 
 /* MESURES TABLE */
 .mesures-table {
@@ -502,7 +502,7 @@ canvas { width: 100% !important; }
           <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--gold)"></div> Poids</div>
         </div>
       </div>
-      <div class="chart-box"><canvas id="chartPoids" height="200"></canvas></div>
+      <div class="chart-box"><div id="chartPoids" style="width:100%;min-height:220px"></div></div>
     </div>
 
     <div class="chart-section">
@@ -513,7 +513,7 @@ canvas { width: 100% !important; }
           <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--cali)"></div> Cuisse</div>
         </div>
       </div>
-      <div class="chart-box"><canvas id="chartMensu" height="200"></canvas></div>
+      <div class="chart-box"><div id="chartMensu" style="width:100%;min-height:220px"></div></div>
     </div>
 
     <div id="mesuresTableWrap"></div>
@@ -954,151 +954,111 @@ function deleteMesure(week) {
   renderDashboard();
 }
 
+
+
 function renderMesures() {
-  renderChartPoids();
-  renderChartMensu();
+  renderSVGChart('chartPoids',
+    STATE.mesures.filter(m=>m.poids).map(m=>({week:m.week, val:m.poids})),
+    '#C9A96E', 'kg', 'Poids'
+  );
+  const hData = STATE.mesures.filter(m=>m.hanche).map(m=>({week:m.week, val:m.hanche}));
+  const cData = STATE.mesures.filter(m=>m.cuisse).map(m=>({week:m.week, val:m.cuisse}));
+  renderSVGChartDouble('chartMensu', hData, '#D4956A', cData, '#7BAF8A', 'cm');
   renderMesuresTable();
 }
 
-function setupCanvas(canvas) {
-  const dpr = window.devicePixelRatio || 1;
-  const W = Math.max(canvas.parentElement ? canvas.parentElement.clientWidth - 40 : 0, 300);
-  const H = 220;
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  const ctx = canvas.getContext('2d');
-  ctx.setTransform(1,0,0,1,0,0);
-  ctx.scale(dpr, dpr);
-  return { ctx, W, H };
-}
+function renderSVGChart(containerId, data, color, unit, label) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-function renderChartPoids() {
-  const canvas = document.getElementById('chartPoids');
-  const { ctx, W, H } = setupCanvas(canvas);
-  ctx.clearRect(0, 0, W, H);
-
-  const data = STATE.mesures.filter(m => m.poids);
   if (data.length === 0) {
-    ctx.fillStyle = 'rgba(122,112,104,0.5)';
-    ctx.font = '13px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Ajoute ta première mesure pour voir la courbe 📈', W/2, H/2);
-    return;
-  }
-  drawLineChart(ctx, W, H, data.map(m=>m.week), data.map(m=>m.poids), '#C9A96E', 'kg');
-}
-
-function renderChartMensu() {
-  const canvas = document.getElementById('chartMensu');
-  const { ctx, W, H } = setupCanvas(canvas);
-  ctx.clearRect(0, 0, W, H);
-
-  const hData = STATE.mesures.filter(m => m.hanche);
-  const cData = STATE.mesures.filter(m => m.cuisse);
-
-  if (hData.length === 0 && cData.length === 0) {
-    ctx.fillStyle = 'rgba(122,112,104,0.5)';
-    ctx.font = '13px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('Ajoute tes mensurations pour voir la courbe 📈', W/2, H/2);
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:220px;color:rgba(122,112,104,0.6);font-size:13px">Ajoute ta première mesure pour voir la courbe 📈</div>`;
     return;
   }
 
-  const allVals = [...hData.map(m=>m.hanche||0), ...cData.map(m=>m.cuisse||0)].filter(v=>v>0);
-  const minV = Math.min(...allVals) - 3;
-  const maxV = Math.max(...allVals) + 3;
-
-  if (hData.length > 0) drawLineChart(ctx, W, H, hData.map(m=>m.week), hData.map(m=>m.hanche), '#D4956A', 'cm', minV, maxV, false);
-  if (cData.length > 0) drawLineChart(ctx, W, H, cData.map(m=>m.week), cData.map(m=>m.cuisse), '#7BAF8A', 'cm', minV, maxV, true);
+  container.innerHTML = buildSVG([{data, color}], unit);
 }
 
-function drawLineChart(ctx, W, H, labels, values, color, unit, forceMin, forceMax, overlay=false) {
-  const pad = { top:20, right:20, bottom:36, left:44 };
+function renderSVGChartDouble(containerId, data1, color1, data2, color2, unit) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (data1.length === 0 && data2.length === 0) {
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:220px;color:rgba(122,112,104,0.6);font-size:13px">Ajoute tes mensurations pour voir la courbe 📈</div>`;
+    return;
+  }
+
+  const series = [];
+  if (data1.length > 0) series.push({data: data1, color: color1});
+  if (data2.length > 0) series.push({data: data2, color: color2});
+  container.innerHTML = buildSVG(series, unit);
+}
+
+function buildSVG(series, unit) {
+  const W = 600, H = 220;
+  const pad = {top:28, right:20, bottom:36, left:48};
   const cW = W - pad.left - pad.right;
   const cH = H - pad.top - pad.bottom;
 
-  const minV = forceMin !== undefined ? forceMin : Math.min(...values) - 2;
-  const maxV = forceMax !== undefined ? forceMax : Math.max(...values) + 2;
+  // Gather all values and weeks
+  const allVals = series.flatMap(s => s.data.map(d => d.val));
+  const allWeeks = [...new Set(series.flatMap(s => s.data.map(d => d.week)))].sort((a,b)=>a-b);
+  if (allVals.length === 0) return '';
+
+  const minV = Math.min(...allVals) - 2;
+  const maxV = Math.max(...allVals) + 2;
   const range = maxV - minV || 1;
 
-  function xPos(i) { return pad.left + (i / Math.max(labels.length-1,1)) * cW; }
-  function yPos(v) { return pad.top + cH - ((v - minV) / range) * cH; }
+  const xPos = (week) => pad.left + ((allWeeks.indexOf(week)) / Math.max(allWeeks.length-1, 1)) * cW;
+  const yPos = (v) => pad.top + cH - ((v - minV) / range) * cH;
 
-  if (!overlay) {
-    // Grid lines
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = pad.top + (i/4)*cH;
-      ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left+cW, y); ctx.stroke();
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">`;
+
+  // Grid lines
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (i/4)*cH;
+    const v = maxV - (i/4)*range;
+    svg += `<line x1="${pad.left}" y1="${y}" x2="${pad.left+cW}" y2="${y}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+    svg += `<text x="${pad.left-6}" y="${y+4}" text-anchor="end" fill="rgba(122,112,104,0.7)" font-size="10" font-family="Outfit,sans-serif">${v.toFixed(1)}</text>`;
+  }
+
+  // X labels
+  allWeeks.forEach(week => {
+    const x = xPos(week);
+    svg += `<text x="${x}" y="${H-6}" text-anchor="middle" fill="rgba(122,112,104,0.7)" font-size="10" font-family="Outfit,sans-serif">S${week}</text>`;
+  });
+
+  // Each series
+  series.forEach(({data, color}) => {
+    const sorted = [...data].sort((a,b)=>a.week-b.week);
+    if (sorted.length === 0) return;
+
+    // Hex to rgb
+    const r=parseInt(color.slice(1,3),16), g=parseInt(color.slice(3,5),16), b=parseInt(color.slice(5,7),16);
+
+    // Area fill
+    const areaPoints = `${xPos(sorted[0].week)},${pad.top+cH} ` +
+      sorted.map(d=>`${xPos(d.week)},${yPos(d.val)}`).join(' ') +
+      ` ${xPos(sorted[sorted.length-1].week)},${pad.top+cH}`;
+    svg += `<polygon points="${areaPoints}" fill="rgba(${r},${g},${b},0.12)"/>`;
+
+    // Line
+    if (sorted.length > 1) {
+      const linePts = sorted.map(d=>`${xPos(d.week)},${yPos(d.val)}`).join(' ');
+      svg += `<polyline points="${linePts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
     }
 
-    // X labels
-    ctx.fillStyle = 'rgba(122,112,104,0.8)';
-    ctx.font = '10px Outfit';
-    ctx.textAlign = 'center';
-    labels.forEach((lbl, i) => {
-      ctx.fillText('S'+lbl, xPos(i), H - 8);
+    // Dots + value labels
+    sorted.forEach(d => {
+      const x = xPos(d.week), y = yPos(d.val);
+      svg += `<circle cx="${x}" cy="${y}" r="5" fill="${color}"/>`;
+      svg += `<circle cx="${x}" cy="${y}" r="2.5" fill="#1A1714"/>`;
+      svg += `<text x="${x}" y="${y-11}" text-anchor="middle" fill="${color}" font-size="11" font-weight="500" font-family="Outfit,sans-serif">${d.val.toFixed(1)}</text>`;
     });
-
-    // Y labels
-    ctx.textAlign = 'right';
-    for (let i = 0; i <= 4; i++) {
-      const v = minV + (i/4)*range;
-      ctx.fillText(v.toFixed(1), pad.left - 6, pad.top + cH - (i/4)*cH + 4);
-    }
-  }
-
-  // Gradient fill under the line
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(xPos(0), pad.top+cH);
-  values.forEach((v,i) => ctx.lineTo(xPos(i), yPos(v)));
-  ctx.lineTo(xPos(values.length-1), pad.top+cH);
-  ctx.closePath();
-  // Convert hex color to rgba for fill
-  let r=0,g=0,b=0;
-  if(color.startsWith('#')) {
-    r=parseInt(color.slice(1,3),16);
-    g=parseInt(color.slice(3,5),16);
-    b=parseInt(color.slice(5,7),16);
-  }
-  ctx.fillStyle = `rgba(${r},${g},${b},0.15)`;
-  ctx.fill();
-  ctx.restore();
-
-  // Line
-  ctx.beginPath();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2.5;
-  ctx.lineJoin = 'round';
-  ctx.lineCap = 'round';
-  values.forEach((v, i) => {
-    i === 0 ? ctx.moveTo(xPos(i), yPos(v)) : ctx.lineTo(xPos(i), yPos(v));
   });
-  ctx.stroke();
 
-  // Dots + values
-  values.forEach((v, i) => {
-    const x = xPos(i), y = yPos(v);
-    ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI*2);
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(x, y, 2, 0, Math.PI*2);
-    ctx.fillStyle = '#1A1714';
-    ctx.fill();
-
-    ctx.fillStyle = color;
-    ctx.font = '10px Outfit';
-    ctx.textAlign = 'center';
-    ctx.fillText(v.toFixed(1), x, y - 10);
-  });
+  svg += '</svg>';
+  return svg;
 }
 
 function renderMesuresTable() {
