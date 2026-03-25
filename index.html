@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com; navigate-to *;">
 <title>Programme Silhouette — 12 Semaines</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -542,38 +543,38 @@ const START_DATE = new Date(2026, 2, 26); // March 26 2026 (month is 0-indexed)
 // EXERCISES DATABASE
 // ============================================================
 const EX = {
-  hundred:    { n:"The Hundred",             d:"3×10 respirations · bras en pompe",         f:"Gainage transverse",             u:"https://www.youtube.com/results?search_query=pilates+hundred+exercise+tutorial+debutant", t:"p" },
-  bridge:     { n:"Bridge Pilates",          d:"4×15 · tempo 3s/3s",                        f:"Fessiers · ischios",             u:"https://www.youtube.com/results?search_query=pilates+bridge+glute+bridge+tutorial", t:"p" },
-  clamshell:  { n:"Clam Shell",              d:"3×20 chaque côté",                          f:"Fessier moyen · abducteurs",     u:"https://www.youtube.com/results?search_query=pilates+clamshell+exercise+fessier+moyen", t:"p" },
-  legcircle:  { n:"Leg Circle",              d:"3×10 cercles/jambe",                        f:"Hanches · stabilité",            u:"https://www.youtube.com/results?search_query=pilates+leg+circle+tutorial+debutant", t:"p" },
-  sideleg:    { n:"Side Leg Lift",           d:"3×15 chaque côté",                          f:"Cuisse externe · fessier moyen", u:"https://www.youtube.com/results?search_query=pilates+side+leg+lift+tutorial", t:"p" },
-  swan:       { n:"Swan Dive",               d:"3×10 · maintien 2s",                        f:"Lombaires · posture",            u:"https://www.youtube.com/results?search_query=pilates+swan+dive+exercise+tutorial", t:"p" },
-  singleleg:  { n:"Single Leg Stretch",      d:"3×10 alternés · nuque décollée",            f:"Abdos · coordination",           u:"https://www.youtube.com/results?search_query=pilates+single+leg+stretch+tutorial", t:"p" },
-  teaser:     { n:"Teaser (prép.)",          d:"3×8 · jambes fléchies",                     f:"Abdos profonds · équilibre",     u:"https://www.youtube.com/results?search_query=pilates+teaser+exercise+debutant", t:"p" },
-  doublekick: { n:"Double Leg Kick",         d:"3×10 · sur le ventre",                      f:"Ischios · fessiers · dos",       u:"https://www.youtube.com/results?search_query=pilates+double+leg+kick+tutorial", t:"p" },
-  sidekick:   { n:"Side Kick Kneeling",      d:"3×15 chaque côté",                          f:"Abducteurs · fessier moyen",     u:"https://www.youtube.com/results?search_query=pilates+side+kick+kneeling+tutorial", t:"p" },
-  spinestr:   { n:"Spine Stretch Forward",   d:"3×8 · étirement actif",                     f:"Colonne · ischios · récup",      u:"https://www.youtube.com/results?search_query=pilates+spine+stretch+forward+tutorial", t:"p" },
-  rollup:     { n:"Roll Up",                 d:"3×8 · vertèbre par vertèbre",               f:"Abdos · mobilité colonne",       u:"https://www.youtube.com/results?search_query=pilates+roll+up+tutorial+debutant", t:"p" },
-  bridgepulse:{ n:"Bridge Pulsé",            d:"3×30 pulsations",                           f:"Fessiers · finisher",            u:"https://www.youtube.com/results?search_query=pilates+bridge+glute+bridge+tutorial", t:"p" },
-  bridgeuni:  { n:"Bridge Unilatéral",       d:"4×12 chaque jambe · tempo lent",            f:"Fessier maximus · ischios",      u:"https://www.youtube.com/results?search_query=single+leg+glute+bridge+tutorial", t:"p" },
-  clamadv:    { n:"Clam Shell + élastique",  d:"4×20 chaque côté",                          f:"Fessier moyen · résistance",     u:"https://www.youtube.com/results?search_query=pilates+clamshell+exercise+fessier+moyen", t:"p" },
-  sqsumo:     { n:"Squat Sumo",              d:"4×15 · pieds à 45°",                        f:"Cuisses internes · fessiers",    u:"https://www.youtube.com/results?search_query=sumo+squat+tutorial+debutant", t:"c" },
-  lungebwd:   { n:"Fentes Arrière Alternées",d:"4×12 chaque jambe",                         f:"Fessiers · quadriceps",          u:"https://www.youtube.com/results?search_query=reverse+lunge+fente+arriere+tutorial", t:"c" },
-  hipthrust:  { n:"Hip Thrust (kettlebell)", d:"4×15 · épaules sur surface",                f:"Fessiers profonds",              u:"https://www.youtube.com/results?search_query=hip+thrust+kettlebell+tutorial+fessiers", t:"c" },
-  donkey:     { n:"Donkey Kick",             d:"3×20 chaque jambe",                         f:"Fessier maximus",                u:"https://www.youtube.com/results?search_query=donkey+kick+exercise+tutorial+fessiers", t:"c" },
-  wallsit:    { n:"Wall Sit",                d:"3×45 secondes",                             f:"Quadriceps · endurance",         u:"https://www.youtube.com/results?search_query=wall+sit+exercise+tutorial+quadriceps", t:"c" },
-  rdl:        { n:"Romanian Deadlift",       d:"3×12 · dos droit, lent",                    f:"Ischios · fessiers · lombaires", u:"https://www.youtube.com/results?search_query=romanian+deadlift+haltere+tutorial", t:"c" },
-  sqclassic:  { n:"Squat Classique",         d:"4×15",                                      f:"Quadriceps · fessiers",          u:"https://www.youtube.com/results?search_query=squat+classique+tutorial+debutant", t:"c" },
-  lungelat:   { n:"Fentes Latérales",        d:"3×12 chaque côté",                          f:"Cuisses · adducteurs",           u:"https://www.youtube.com/results?search_query=lateral+lunge+fente+laterale+tutorial", t:"c" },
-  goodmorning:{ n:"Good Morning (haltères)", d:"3×12 · léger",                             f:"Ischios · lombaires",            u:"https://www.youtube.com/results?search_query=good+morning+exercise+haltere+tutorial", t:"c" },
-  bulgarian:  { n:"Bulgarian Split Squat",   d:"4×10 chaque jambe",                         f:"Fessiers · quadriceps unilatéral",u:"https://www.youtube.com/results?search_query=bulgarian+split+squat+tutorial", t:"c" },
-  hipelev:    { n:"Hip Thrust Pied Élevé",   d:"4×12 chaque jambe",                         f:"Fessier maximus · activation max",u:"https://www.youtube.com/results?search_query=hip+thrust+kettlebell+tutorial+fessiers", t:"c" },
-  pistol:     { n:"Pistol Squat (prépa)",    d:"3×8 chaque jambe · avec support",           f:"Force unilatérale · équilibre",  u:"https://www.youtube.com/results?search_query=pistol+squat+preparation+tutorial+debutant", t:"c" },
-  sqjump:     { n:"Squat Jump",              d:"3×12 · atterrissage doux",                  f:"Explosivité · cuisses · cardio", u:"https://www.youtube.com/results?search_query=squat+jump+tutorial+cardio", t:"m" },
-  plankdog:   { n:"Plank to Downward Dog",   d:"3×10 · fluide",                             f:"Gainage · épaules · chaîne post.",u:"https://www.youtube.com/results?search_query=plank+to+downward+dog+tutorial", t:"m" },
-  curtsy:     { n:"Curtsy Lunge",            d:"3×15 chaque jambe",                         f:"Fessier moyen · galbe cuisses",  u:"https://www.youtube.com/results?search_query=curtsy+lunge+fente+croisee+tutorial", t:"m" },
-  pigeon:     { n:"Pigeon Pose (stretch)",   d:"2×60s chaque côté",                         f:"Récup fessiers · hanches",       u:"https://www.youtube.com/results?search_query=pigeon+pose+yoga+stretch+hanche", t:"m" },
-  sumojump:   { n:"Sumo Squat Jump",         d:"3×10 · atterrissage contrôlé",              f:"Explosivité · cuisses internes", u:"https://www.youtube.com/results?search_query=sumo+squat+tutorial+debutant", t:"m" },
+  hundred:    { n:"The Hundred",             d:"3×10 respirations · bras en pompe",         f:"Gainage transverse",             u:"https://www.youtube.com/watch?v=S6ew-i-4Ue8", t:"p" },
+  bridge:     { n:"Bridge Pilates",          d:"4×15 · tempo 3s/3s",                        f:"Fessiers · ischios",             u:"https://www.youtube.com/watch?v=OB0xFqBGsyY", t:"p" },
+  clamshell:  { n:"Clam Shell",              d:"3×20 chaque côté",                          f:"Fessier moyen · abducteurs",     u:"https://www.youtube.com/watch?v=Uol1UTvQyLA", t:"p" },
+  legcircle:  { n:"Leg Circle",              d:"3×10 cercles/jambe",                        f:"Hanches · stabilité",            u:"https://www.youtube.com/watch?v=HGEe-6yrxEM", t:"p" },
+  sideleg:    { n:"Side Leg Lift",           d:"3×15 chaque côté",                          f:"Cuisse externe · fessier moyen", u:"https://www.youtube.com/watch?v=sWKfjLYnCgY", t:"p" },
+  swan:       { n:"Swan Dive",               d:"3×10 · maintien 2s",                        f:"Lombaires · posture",            u:"https://www.youtube.com/watch?v=x5OyuM7k3vU", t:"p" },
+  singleleg:  { n:"Single Leg Stretch",      d:"3×10 alternés · nuque décollée",            f:"Abdos · coordination",           u:"https://www.youtube.com/watch?v=eTHs6LDDXOU", t:"p" },
+  teaser:     { n:"Teaser (prép.)",          d:"3×8 · jambes fléchies",                     f:"Abdos profonds · équilibre",     u:"https://www.youtube.com/watch?v=R0mASebRRDM", t:"p" },
+  doublekick: { n:"Double Leg Kick",         d:"3×10 · sur le ventre",                      f:"Ischios · fessiers · dos",       u:"https://www.youtube.com/watch?v=6pMIisMvkP4", t:"p" },
+  sidekick:   { n:"Side Kick Kneeling",      d:"3×15 chaque côté",                          f:"Abducteurs · fessier moyen",     u:"https://www.youtube.com/watch?v=oO0yHWFhXjw", t:"p" },
+  spinestr:   { n:"Spine Stretch Forward",   d:"3×8 · étirement actif",                     f:"Colonne · ischios · récup",      u:"https://www.youtube.com/watch?v=bVFaRwsnwEk", t:"p" },
+  rollup:     { n:"Roll Up",                 d:"3×8 · vertèbre par vertèbre",               f:"Abdos · mobilité colonne",       u:"https://www.youtube.com/watch?v=hW2GHjvZWfQ", t:"p" },
+  bridgepulse:{ n:"Bridge Pulsé",            d:"3×30 pulsations",                           f:"Fessiers · finisher",            u:"https://www.youtube.com/watch?v=OB0xFqBGsyY", t:"p" },
+  bridgeuni:  { n:"Bridge Unilatéral",       d:"4×12 chaque jambe · tempo lent",            f:"Fessier maximus · ischios",      u:"https://www.youtube.com/watch?v=8bbE64NuDTU", t:"p" },
+  clamadv:    { n:"Clam Shell + élastique",  d:"4×20 chaque côté",                          f:"Fessier moyen · résistance",     u:"https://www.youtube.com/watch?v=Uol1UTvQyLA", t:"p" },
+  sqsumo:     { n:"Squat Sumo",              d:"4×15 · pieds à 45°",                        f:"Cuisses internes · fessiers",    u:"https://www.youtube.com/watch?v=_hOQdkrJQrk", t:"c" },
+  lungebwd:   { n:"Fentes Arrière Alternées",d:"4×12 chaque jambe",                         f:"Fessiers · quadriceps",          u:"https://www.youtube.com/watch?v=QOVaHwm-Q6U", t:"c" },
+  hipthrust:  { n:"Hip Thrust (kettlebell)", d:"4×15 · épaules sur surface",                f:"Fessiers profonds",              u:"https://www.youtube.com/watch?v=xDmFkJxPzeM", t:"c" },
+  donkey:     { n:"Donkey Kick",             d:"3×20 chaque jambe",                         f:"Fessier maximus",                u:"https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ", t:"c" },
+  wallsit:    { n:"Wall Sit",                d:"3×45 secondes",                             f:"Quadriceps · endurance",         u:"https://www.youtube.com/watch?v=y-wV4Venusw", t:"c" },
+  rdl:        { n:"Romanian Deadlift",       d:"3×12 · dos droit, lent",                    f:"Ischios · fessiers · lombaires", u:"https://www.youtube.com/watch?v=hCDzSR6bW10", t:"c" },
+  sqclassic:  { n:"Squat Classique",         d:"4×15",                                      f:"Quadriceps · fessiers",          u:"https://www.youtube.com/watch?v=aclHkVaku9U", t:"c" },
+  lungelat:   { n:"Fentes Latérales",        d:"3×12 chaque côté",                          f:"Cuisses · adducteurs",           u:"https://www.youtube.com/watch?v=gwWv7aPcD88", t:"c" },
+  goodmorning:{ n:"Good Morning (haltères)", d:"3×12 · léger",                             f:"Ischios · lombaires",            u:"https://www.youtube.com/watch?v=YA-h3n9L4YU", t:"c" },
+  bulgarian:  { n:"Bulgarian Split Squat",   d:"4×10 chaque jambe",                         f:"Fessiers · quadriceps unilatéral",u:"https://www.youtube.com/watch?v=2C-uNgKwPLE", t:"c" },
+  hipelev:    { n:"Hip Thrust Pied Élevé",   d:"4×12 chaque jambe",                         f:"Fessier maximus · activation max",u:"https://www.youtube.com/watch?v=xDmFkJxPzeM", t:"c" },
+  pistol:     { n:"Pistol Squat (prépa)",    d:"3×8 chaque jambe · avec support",           f:"Force unilatérale · équilibre",  u:"https://www.youtube.com/watch?v=vq5-vdgJc0I", t:"c" },
+  sqjump:     { n:"Squat Jump",              d:"3×12 · atterrissage doux",                  f:"Explosivité · cuisses · cardio", u:"https://www.youtube.com/watch?v=CVaEhXotL7M", t:"m" },
+  plankdog:   { n:"Plank to Downward Dog",   d:"3×10 · fluide",                             f:"Gainage · épaules · chaîne post.",u:"https://www.youtube.com/watch?v=wqdoAYuijFU", t:"m" },
+  curtsy:     { n:"Curtsy Lunge",            d:"3×15 chaque jambe",                         f:"Fessier moyen · galbe cuisses",  u:"https://www.youtube.com/watch?v=c7IhHC2WT4I", t:"m" },
+  pigeon:     { n:"Pigeon Pose (stretch)",   d:"2×60s chaque côté",                         f:"Récup fessiers · hanches",       u:"https://www.youtube.com/watch?v=kA75L2Q4Gs4", t:"m" },
+  sumojump:   { n:"Sumo Squat Jump",         d:"3×10 · atterrissage contrôlé",              f:"Explosivité · cuisses internes", u:"https://www.youtube.com/watch?v=_hOQdkrJQrk", t:"m" },
 };
 
 // ============================================================
@@ -858,7 +859,7 @@ function openModal(w, d) {
       <div class="ex-top">
         <div class="ex-num ${nc}">${i+1}</div>
         <div class="ex-name">${ex.n}</div>
-        <a href="${ex.u}" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href,'_blank');return false;" class="ex-link ${lc}">▶ Vidéo</a>
+        <a href="${ex.u}" target="_blank" rel="noopener noreferrer" class="ex-link ${lc}" onclick="event.preventDefault();event.stopPropagation();var u=this.getAttribute('href');var w=window.open('','_blank');w.location.href=u;">▶ Vidéo</a>
       </div>
       <div class="ex-detail">${ex.d}</div>
       <div class="ex-focus">${ex.f}</div>
@@ -941,14 +942,15 @@ function addMesure() {
   document.getElementById('mf-hanche').value = '';
   document.getElementById('mf-cuisse').value = '';
 
-  renderMesures();
+  // Redraw after a frame to ensure canvas is visible
+  requestAnimationFrame(() => requestAnimationFrame(() => renderMesures()));
   renderDashboard();
 }
 
 function deleteMesure(week) {
   STATE.mesures = STATE.mesures.filter(m => m.week !== week);
   saveState(STATE);
-  renderMesures();
+  requestAnimationFrame(() => requestAnimationFrame(() => renderMesures()));
   renderDashboard();
 }
 
@@ -958,52 +960,59 @@ function renderMesures() {
   renderMesuresTable();
 }
 
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = Math.max(canvas.parentElement ? canvas.parentElement.clientWidth - 40 : 0, 300);
+  const H = 220;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.scale(dpr, dpr);
+  return { ctx, W, H };
+}
+
 function renderChartPoids() {
   const canvas = document.getElementById('chartPoids');
-  const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth * window.devicePixelRatio || 600;
-  canvas.height = 200 * window.devicePixelRatio || 200;
-  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-  const W = canvas.offsetWidth || 600, H = 200;
-  ctx.clearRect(0,0,W,H);
+  const { ctx, W, H } = setupCanvas(canvas);
+  ctx.clearRect(0, 0, W, H);
 
   const data = STATE.mesures.filter(m => m.poids);
   if (data.length === 0) {
-    ctx.fillStyle = 'rgba(122,112,104,0.4)';
-    ctx.font = '13px Outfit';
+    ctx.fillStyle = 'rgba(122,112,104,0.5)';
+    ctx.font = '13px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Aucune donnée — ajoute ta première mesure 👆', W/2, H/2);
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Ajoute ta première mesure pour voir la courbe 📈', W/2, H/2);
     return;
   }
-
   drawLineChart(ctx, W, H, data.map(m=>m.week), data.map(m=>m.poids), '#C9A96E', 'kg');
 }
 
 function renderChartMensu() {
   const canvas = document.getElementById('chartMensu');
-  const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth * window.devicePixelRatio || 600;
-  canvas.height = 200 * window.devicePixelRatio || 200;
-  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-  const W = canvas.offsetWidth || 600, H = 200;
-  ctx.clearRect(0,0,W,H);
+  const { ctx, W, H } = setupCanvas(canvas);
+  ctx.clearRect(0, 0, W, H);
 
   const hData = STATE.mesures.filter(m => m.hanche);
   const cData = STATE.mesures.filter(m => m.cuisse);
 
   if (hData.length === 0 && cData.length === 0) {
-    ctx.fillStyle = 'rgba(122,112,104,0.4)';
-    ctx.font = '13px Outfit';
+    ctx.fillStyle = 'rgba(122,112,104,0.5)';
+    ctx.font = '13px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Aucune donnée — ajoute tes mensurations 👆', W/2, H/2);
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Ajoute tes mensurations pour voir la courbe 📈', W/2, H/2);
     return;
   }
 
-  const allVals = [...hData.map(m=>m.hanche), ...cData.map(m=>m.cuisse)].filter(Boolean);
+  const allVals = [...hData.map(m=>m.hanche||0), ...cData.map(m=>m.cuisse||0)].filter(v=>v>0);
   const minV = Math.min(...allVals) - 3;
   const maxV = Math.max(...allVals) + 3;
 
-  if (hData.length > 0) drawLineChart(ctx, W, H, hData.map(m=>m.week), hData.map(m=>m.hanche), '#D4956A', 'cm', minV, maxV);
+  if (hData.length > 0) drawLineChart(ctx, W, H, hData.map(m=>m.week), hData.map(m=>m.hanche), '#D4956A', 'cm', minV, maxV, false);
   if (cData.length > 0) drawLineChart(ctx, W, H, cData.map(m=>m.week), cData.map(m=>m.cuisse), '#7BAF8A', 'cm', minV, maxV, true);
 }
 
@@ -1044,17 +1053,21 @@ function drawLineChart(ctx, W, H, labels, values, color, unit, forceMin, forceMa
     }
   }
 
-  // Gradient fill
-  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top+cH);
-  grad.addColorStop(0, color.replace(')', ',0.25)').replace('rgb','rgba').replace('#', 'rgba(').replace('var(', 'rgba('));
-  // Simple fallback gradient
+  // Gradient fill under the line
   ctx.save();
   ctx.beginPath();
   ctx.moveTo(xPos(0), pad.top+cH);
   values.forEach((v,i) => ctx.lineTo(xPos(i), yPos(v)));
   ctx.lineTo(xPos(values.length-1), pad.top+cH);
   ctx.closePath();
-  ctx.fillStyle = color + '22';
+  // Convert hex color to rgba for fill
+  let r=0,g=0,b=0;
+  if(color.startsWith('#')) {
+    r=parseInt(color.slice(1,3),16);
+    g=parseInt(color.slice(3,5),16);
+    b=parseInt(color.slice(5,7),16);
+  }
+  ctx.fillStyle = `rgba(${r},${g},${b},0.15)`;
   ctx.fill();
   ctx.restore();
 
@@ -1131,7 +1144,8 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById(`page-${tab.dataset.page}`).classList.add('active');
     if (tab.dataset.page === 'mesures') {
-      setTimeout(() => renderMesures(), 50);
+      // Use requestAnimationFrame to ensure DOM is painted before drawing canvas
+      requestAnimationFrame(() => requestAnimationFrame(() => renderMesures()));
     }
   });
 });
