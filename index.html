@@ -542,38 +542,38 @@ const START_DATE = new Date(2026, 2, 26); // March 26 2026 (month is 0-indexed)
 // EXERCISES DATABASE
 // ============================================================
 const EX = {
-  hundred:    { n:"The Hundred",             d:"3×10 respirations · bras en pompe",         f:"Gainage transverse",             u:"https://www.youtube.com/watch?v=5dXYW1cpKwA", t:"p" },
-  bridge:     { n:"Bridge Pilates",          d:"4×15 · tempo 3s/3s",                        f:"Fessiers · ischios",             u:"https://www.youtube.com/watch?v=OB0xFqBGsyY", t:"p" },
-  clamshell:  { n:"Clam Shell",              d:"3×20 chaque côté",                          f:"Fessier moyen · abducteurs",     u:"https://www.youtube.com/watch?v=Uol1UTvQyLA", t:"p" },
-  legcircle:  { n:"Leg Circle",              d:"3×10 cercles/jambe",                        f:"Hanches · stabilité",            u:"https://www.youtube.com/watch?v=HGEe-6yrxEM", t:"p" },
-  sideleg:    { n:"Side Leg Lift",           d:"3×15 chaque côté",                          f:"Cuisse externe · fessier moyen", u:"https://www.youtube.com/watch?v=sWKfjLYnCgY", t:"p" },
-  swan:       { n:"Swan Dive",               d:"3×10 · maintien 2s",                        f:"Lombaires · posture",            u:"https://www.youtube.com/watch?v=x5OyuM7k3vU", t:"p" },
-  singleleg:  { n:"Single Leg Stretch",      d:"3×10 alternés · nuque décollée",            f:"Abdos · coordination",           u:"https://www.youtube.com/watch?v=eTHs6LDDXOU", t:"p" },
-  teaser:     { n:"Teaser (prép.)",          d:"3×8 · jambes fléchies",                     f:"Abdos profonds · équilibre",     u:"https://www.youtube.com/watch?v=R0mASebRRDM", t:"p" },
-  doublekick: { n:"Double Leg Kick",         d:"3×10 · sur le ventre",                      f:"Ischios · fessiers · dos",       u:"https://www.youtube.com/watch?v=6pMIisMvkP4", t:"p" },
-  sidekick:   { n:"Side Kick Kneeling",      d:"3×15 chaque côté",                          f:"Abducteurs · fessier moyen",     u:"https://www.youtube.com/watch?v=oO0yHWFhXjw", t:"p" },
-  spinestr:   { n:"Spine Stretch Forward",   d:"3×8 · étirement actif",                     f:"Colonne · ischios · récup",      u:"https://www.youtube.com/watch?v=bVFaRwsnwEk", t:"p" },
-  rollup:     { n:"Roll Up",                 d:"3×8 · vertèbre par vertèbre",               f:"Abdos · mobilité colonne",       u:"https://www.youtube.com/watch?v=hW2GHjvZWfQ", t:"p" },
-  bridgepulse:{ n:"Bridge Pulsé",            d:"3×30 pulsations",                           f:"Fessiers · finisher",            u:"https://www.youtube.com/watch?v=OB0xFqBGsyY", t:"p" },
-  bridgeuni:  { n:"Bridge Unilatéral",       d:"4×12 chaque jambe · tempo lent",            f:"Fessier maximus · ischios",      u:"https://www.youtube.com/watch?v=8bbE64NuDTU", t:"p" },
-  clamadv:    { n:"Clam Shell + élastique",  d:"4×20 chaque côté",                          f:"Fessier moyen · résistance",     u:"https://www.youtube.com/watch?v=Uol1UTvQyLA", t:"p" },
-  sqsumo:     { n:"Squat Sumo",              d:"4×15 · pieds à 45°",                        f:"Cuisses internes · fessiers",    u:"https://www.youtube.com/watch?v=_hOQdkrJQrk", t:"c" },
-  lungebwd:   { n:"Fentes Arrière Alternées",d:"4×12 chaque jambe",                         f:"Fessiers · quadriceps",          u:"https://www.youtube.com/watch?v=QOVaHwm-Q6U", t:"c" },
-  hipthrust:  { n:"Hip Thrust (kettlebell)", d:"4×15 · épaules sur surface",                f:"Fessiers profonds",              u:"https://www.youtube.com/watch?v=xDmFkJxPzeM", t:"c" },
-  donkey:     { n:"Donkey Kick",             d:"3×20 chaque jambe",                         f:"Fessier maximus",                u:"https://www.youtube.com/watch?v=SJ1Xuz9D-ZQ", t:"c" },
-  wallsit:    { n:"Wall Sit",                d:"3×45 secondes",                             f:"Quadriceps · endurance",         u:"https://www.youtube.com/watch?v=y-wV4Venusw", t:"c" },
-  rdl:        { n:"Romanian Deadlift",       d:"3×12 · dos droit, lent",                    f:"Ischios · fessiers · lombaires", u:"https://www.youtube.com/watch?v=hCDzSR6bW10", t:"c" },
-  sqclassic:  { n:"Squat Classique",         d:"4×15",                                      f:"Quadriceps · fessiers",          u:"https://www.youtube.com/watch?v=aclHkVaku9U", t:"c" },
-  lungelat:   { n:"Fentes Latérales",        d:"3×12 chaque côté",                          f:"Cuisses · adducteurs",           u:"https://www.youtube.com/watch?v=gwWv7aPcD88", t:"c" },
-  goodmorning:{ n:"Good Morning (haltères)", d:"3×12 · léger",                             f:"Ischios · lombaires",            u:"https://www.youtube.com/watch?v=YA-h3n9L4YU", t:"c" },
-  bulgarian:  { n:"Bulgarian Split Squat",   d:"4×10 chaque jambe",                         f:"Fessiers · quadriceps unilatéral",u:"https://www.youtube.com/watch?v=2C-uNgKwPLE", t:"c" },
-  hipelev:    { n:"Hip Thrust Pied Élevé",   d:"4×12 chaque jambe",                         f:"Fessier maximus · activation max",u:"https://www.youtube.com/watch?v=xDmFkJxPzeM", t:"c" },
-  pistol:     { n:"Pistol Squat (prépa)",    d:"3×8 chaque jambe · avec support",           f:"Force unilatérale · équilibre",  u:"https://www.youtube.com/watch?v=vq5-vdgJc0I", t:"c" },
-  sqjump:     { n:"Squat Jump",              d:"3×12 · atterrissage doux",                  f:"Explosivité · cuisses · cardio", u:"https://www.youtube.com/watch?v=CVaEhXotL7M", t:"m" },
-  plankdog:   { n:"Plank to Downward Dog",   d:"3×10 · fluide",                             f:"Gainage · épaules · chaîne post.",u:"https://www.youtube.com/watch?v=wqdoAYuijFU", t:"m" },
-  curtsy:     { n:"Curtsy Lunge",            d:"3×15 chaque jambe",                         f:"Fessier moyen · galbe cuisses",  u:"https://www.youtube.com/watch?v=c7IhHC2WT4I", t:"m" },
-  pigeon:     { n:"Pigeon Pose (stretch)",   d:"2×60s chaque côté",                         f:"Récup fessiers · hanches",       u:"https://www.youtube.com/watch?v=kA75L2Q4Gs4", t:"m" },
-  sumojump:   { n:"Sumo Squat Jump",         d:"3×10 · atterrissage contrôlé",              f:"Explosivité · cuisses internes", u:"https://www.youtube.com/watch?v=_hOQdkrJQrk", t:"m" },
+  hundred:    { n:"The Hundred",             d:"3×10 respirations · bras en pompe",         f:"Gainage transverse",             u:"https://www.youtube.com/results?search_query=pilates+hundred+exercise+tutorial+debutant", t:"p" },
+  bridge:     { n:"Bridge Pilates",          d:"4×15 · tempo 3s/3s",                        f:"Fessiers · ischios",             u:"https://www.youtube.com/results?search_query=pilates+bridge+glute+bridge+tutorial", t:"p" },
+  clamshell:  { n:"Clam Shell",              d:"3×20 chaque côté",                          f:"Fessier moyen · abducteurs",     u:"https://www.youtube.com/results?search_query=pilates+clamshell+exercise+fessier+moyen", t:"p" },
+  legcircle:  { n:"Leg Circle",              d:"3×10 cercles/jambe",                        f:"Hanches · stabilité",            u:"https://www.youtube.com/results?search_query=pilates+leg+circle+tutorial+debutant", t:"p" },
+  sideleg:    { n:"Side Leg Lift",           d:"3×15 chaque côté",                          f:"Cuisse externe · fessier moyen", u:"https://www.youtube.com/results?search_query=pilates+side+leg+lift+tutorial", t:"p" },
+  swan:       { n:"Swan Dive",               d:"3×10 · maintien 2s",                        f:"Lombaires · posture",            u:"https://www.youtube.com/results?search_query=pilates+swan+dive+exercise+tutorial", t:"p" },
+  singleleg:  { n:"Single Leg Stretch",      d:"3×10 alternés · nuque décollée",            f:"Abdos · coordination",           u:"https://www.youtube.com/results?search_query=pilates+single+leg+stretch+tutorial", t:"p" },
+  teaser:     { n:"Teaser (prép.)",          d:"3×8 · jambes fléchies",                     f:"Abdos profonds · équilibre",     u:"https://www.youtube.com/results?search_query=pilates+teaser+exercise+debutant", t:"p" },
+  doublekick: { n:"Double Leg Kick",         d:"3×10 · sur le ventre",                      f:"Ischios · fessiers · dos",       u:"https://www.youtube.com/results?search_query=pilates+double+leg+kick+tutorial", t:"p" },
+  sidekick:   { n:"Side Kick Kneeling",      d:"3×15 chaque côté",                          f:"Abducteurs · fessier moyen",     u:"https://www.youtube.com/results?search_query=pilates+side+kick+kneeling+tutorial", t:"p" },
+  spinestr:   { n:"Spine Stretch Forward",   d:"3×8 · étirement actif",                     f:"Colonne · ischios · récup",      u:"https://www.youtube.com/results?search_query=pilates+spine+stretch+forward+tutorial", t:"p" },
+  rollup:     { n:"Roll Up",                 d:"3×8 · vertèbre par vertèbre",               f:"Abdos · mobilité colonne",       u:"https://www.youtube.com/results?search_query=pilates+roll+up+tutorial+debutant", t:"p" },
+  bridgepulse:{ n:"Bridge Pulsé",            d:"3×30 pulsations",                           f:"Fessiers · finisher",            u:"https://www.youtube.com/results?search_query=pilates+bridge+glute+bridge+tutorial", t:"p" },
+  bridgeuni:  { n:"Bridge Unilatéral",       d:"4×12 chaque jambe · tempo lent",            f:"Fessier maximus · ischios",      u:"https://www.youtube.com/results?search_query=single+leg+glute+bridge+tutorial", t:"p" },
+  clamadv:    { n:"Clam Shell + élastique",  d:"4×20 chaque côté",                          f:"Fessier moyen · résistance",     u:"https://www.youtube.com/results?search_query=pilates+clamshell+exercise+fessier+moyen", t:"p" },
+  sqsumo:     { n:"Squat Sumo",              d:"4×15 · pieds à 45°",                        f:"Cuisses internes · fessiers",    u:"https://www.youtube.com/results?search_query=sumo+squat+tutorial+debutant", t:"c" },
+  lungebwd:   { n:"Fentes Arrière Alternées",d:"4×12 chaque jambe",                         f:"Fessiers · quadriceps",          u:"https://www.youtube.com/results?search_query=reverse+lunge+fente+arriere+tutorial", t:"c" },
+  hipthrust:  { n:"Hip Thrust (kettlebell)", d:"4×15 · épaules sur surface",                f:"Fessiers profonds",              u:"https://www.youtube.com/results?search_query=hip+thrust+kettlebell+tutorial+fessiers", t:"c" },
+  donkey:     { n:"Donkey Kick",             d:"3×20 chaque jambe",                         f:"Fessier maximus",                u:"https://www.youtube.com/results?search_query=donkey+kick+exercise+tutorial+fessiers", t:"c" },
+  wallsit:    { n:"Wall Sit",                d:"3×45 secondes",                             f:"Quadriceps · endurance",         u:"https://www.youtube.com/results?search_query=wall+sit+exercise+tutorial+quadriceps", t:"c" },
+  rdl:        { n:"Romanian Deadlift",       d:"3×12 · dos droit, lent",                    f:"Ischios · fessiers · lombaires", u:"https://www.youtube.com/results?search_query=romanian+deadlift+haltere+tutorial", t:"c" },
+  sqclassic:  { n:"Squat Classique",         d:"4×15",                                      f:"Quadriceps · fessiers",          u:"https://www.youtube.com/results?search_query=squat+classique+tutorial+debutant", t:"c" },
+  lungelat:   { n:"Fentes Latérales",        d:"3×12 chaque côté",                          f:"Cuisses · adducteurs",           u:"https://www.youtube.com/results?search_query=lateral+lunge+fente+laterale+tutorial", t:"c" },
+  goodmorning:{ n:"Good Morning (haltères)", d:"3×12 · léger",                             f:"Ischios · lombaires",            u:"https://www.youtube.com/results?search_query=good+morning+exercise+haltere+tutorial", t:"c" },
+  bulgarian:  { n:"Bulgarian Split Squat",   d:"4×10 chaque jambe",                         f:"Fessiers · quadriceps unilatéral",u:"https://www.youtube.com/results?search_query=bulgarian+split+squat+tutorial", t:"c" },
+  hipelev:    { n:"Hip Thrust Pied Élevé",   d:"4×12 chaque jambe",                         f:"Fessier maximus · activation max",u:"https://www.youtube.com/results?search_query=hip+thrust+kettlebell+tutorial+fessiers", t:"c" },
+  pistol:     { n:"Pistol Squat (prépa)",    d:"3×8 chaque jambe · avec support",           f:"Force unilatérale · équilibre",  u:"https://www.youtube.com/results?search_query=pistol+squat+preparation+tutorial+debutant", t:"c" },
+  sqjump:     { n:"Squat Jump",              d:"3×12 · atterrissage doux",                  f:"Explosivité · cuisses · cardio", u:"https://www.youtube.com/results?search_query=squat+jump+tutorial+cardio", t:"m" },
+  plankdog:   { n:"Plank to Downward Dog",   d:"3×10 · fluide",                             f:"Gainage · épaules · chaîne post.",u:"https://www.youtube.com/results?search_query=plank+to+downward+dog+tutorial", t:"m" },
+  curtsy:     { n:"Curtsy Lunge",            d:"3×15 chaque jambe",                         f:"Fessier moyen · galbe cuisses",  u:"https://www.youtube.com/results?search_query=curtsy+lunge+fente+croisee+tutorial", t:"m" },
+  pigeon:     { n:"Pigeon Pose (stretch)",   d:"2×60s chaque côté",                         f:"Récup fessiers · hanches",       u:"https://www.youtube.com/results?search_query=pigeon+pose+yoga+stretch+hanche", t:"m" },
+  sumojump:   { n:"Sumo Squat Jump",         d:"3×10 · atterrissage contrôlé",              f:"Explosivité · cuisses internes", u:"https://www.youtube.com/results?search_query=sumo+squat+tutorial+debutant", t:"m" },
 };
 
 // ============================================================
@@ -858,7 +858,7 @@ function openModal(w, d) {
       <div class="ex-top">
         <div class="ex-num ${nc}">${i+1}</div>
         <div class="ex-name">${ex.n}</div>
-        <a href="${ex.u}" target="_blank" class="ex-link ${lc}">▶ Vidéo</a>
+        <a href="${ex.u}" target="_blank" rel="noopener noreferrer" onclick="window.open(this.href,'_blank');return false;" class="ex-link ${lc}">▶ Vidéo</a>
       </div>
       <div class="ex-detail">${ex.d}</div>
       <div class="ex-focus">${ex.f}</div>
